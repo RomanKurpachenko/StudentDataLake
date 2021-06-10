@@ -16,4 +16,8 @@ export class StudentService {
   getStudents(): Observable<Student[]>{
     return this.http.get<Student[]>(this.url);
   }
+
+  createStudent(data: Student): Observable<void> {
+    return this.http.post<void>(this.url, data);
+  }
 }

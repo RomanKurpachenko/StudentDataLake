@@ -1,6 +1,6 @@
-<pre>
-    {{students | json}}
-</pre>
+<button mat-button (click)='openDialog()'>
+    Add student
+</button>
 <mat-list>
     <mat-list-item *ngFor='let student of students'>
        Id == {{student.id}}. {{student.firstName}} {{student.lastName}}

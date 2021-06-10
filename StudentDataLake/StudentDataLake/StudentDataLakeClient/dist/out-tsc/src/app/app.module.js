@@ -11,6 +11,7 @@ import { CheckListComponent } from './check-list/check-list.component';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StudentService } from './services/student.service';
+import { StudentDialogComponent } from './students/student-dialog/student-dialog.component';
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -20,7 +21,8 @@ AppModule = __decorate([
             HomeComponent,
             StudentsComponent,
             NavbarComponent,
-            CheckListComponent
+            CheckListComponent,
+            StudentDialogComponent
         ],
         imports: [
             BrowserModule,

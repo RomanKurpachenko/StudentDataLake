@@ -17,7 +17,7 @@ namespace StudentDataLake
 
         public IConfiguration Configuration { get; }
 
-        private readonly string JSClientName = "PeopleSurveyClient";
+        private readonly string JSClientName = "StudentDataLakeClient";
 
         public Startup(
             IWebHostEnvironment environment,
@@ -77,12 +77,22 @@ namespace StudentDataLake
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints
-                .MapDefaultControllerRoute()
-                .RequireAuthorization();
-            });
+            app
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints
+                    .MapDefaultControllerRoute()
+                    .RequireAuthorization();
+                });
+                //.UseSpa(spa =>
+                //{
+                //    spa.Options.SourcePath = $"{JSClientName}";
+
+                //    if (Environment.IsDevelopment())
+                //    {
+                //        spa.UseAngularCliServer(npmScript: "start");
+                //    }
+                //});
         }
     }
 }

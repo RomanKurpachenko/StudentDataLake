@@ -1,9 +1,11 @@
 import { __decorate } from "tslib";
 import { Component } from '@angular/core';
+import { StudentDialogComponent } from './student-dialog/student-dialog.component';
 let StudentsComponent = class StudentsComponent {
-    constructor(spinner, studentService) {
+    constructor(spinner, studentService, dialog) {
         this.spinner = spinner;
         this.studentService = studentService;
+        this.dialog = dialog;
     }
     ngOnInit() {
         this.spinner.show();
@@ -16,6 +18,25 @@ let StudentsComponent = class StudentsComponent {
             console.log("Нет данных, потому что ошибка");
             this.students = [];
             this.spinner.hide();
+        });
+    }
+    getNewStudent() {
+        return {
+            id: 0,
+            email: "",
+            firstName: "",
+            firstNativeName: "",
+            lastName: "",
+            lastNativeName: ""
+        };
+    }
+    openDialog() {
+        const dialogRef = this.dialog.open(StudentDialogComponent, {
+            width: '250px',
+            data: this.getNewStudent()
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
         });
     }
 };
