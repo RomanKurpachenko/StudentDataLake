@@ -10,8 +10,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckListComponent } from './check-list/check-list.component';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
+
 import { StudentService } from './services/student.service';
+import { CheckListService } from './services/check-list.service';
+
 import { StudentDialogComponent } from './students/student-dialog/student-dialog.component';
+import { CheckListDialogComponent } from './check-list/check-list-dialog/check-list-dialog.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,8 @@ import { StudentDialogComponent } from './students/student-dialog/student-dialog
     StudentsComponent,
     NavbarComponent,
     CheckListComponent,
-    StudentDialogComponent
+    StudentDialogComponent,
+    CheckListDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,8 @@ import { StudentDialogComponent } from './students/student-dialog/student-dialog
     MaterialModule,
   ],
   providers: [
-    StudentService
+    StudentService,
+    CheckListService
   ],
   bootstrap: [AppComponent]
 })

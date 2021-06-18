@@ -1,1 +1,8 @@
-<p>check-list works!</p>
+<button mat-button (click)='openDialog()'>
+    Add checkList
+</button>
+<mat-list>
+    <mat-list-item *ngFor='let checkList of checkLists'>
+        Id == {{checkList.id}}. {{checkList.name}} {{checkList.level}}
+    </mat-list-item>
+</mat-list>
