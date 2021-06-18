@@ -17,7 +17,15 @@ export class StudentService {
     return this.http.get<Student[]>(this.url);
   }
 
-  createStudent(data: Student): Observable<void> {
+  create(data: Student): Observable<void> {
     return this.http.post<void>(this.url, data);
+  }
+
+  update(data: Student): Observable<void> {
+    return this.http.put<void>(`${this.url}/${data.id}`, data);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`);
   }
 }

@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StudentDataLake.Common.Entity.Students;
 using StudentDataLake.Infrastructure.Databases;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace StudentDataLake.Infrastructure.Services.Students
@@ -67,9 +64,17 @@ namespace StudentDataLake.Infrastructure.Services.Students
 
                 if (student != null)
                 {
-                    student = data;
+                    student.Email = data.Email;
 
-                    _db.Students.Update(student);
+                    student.FirstName = data.FirstName;
+
+                    student.FirstNativeName = data.FirstNativeName;
+
+                    student.LastName = data.LastName;
+
+                    student.LastNativeName = student.LastNativeName;
+
+                    _db.Update(student);
 
                     await _db.SaveChangesAsync();
                 }

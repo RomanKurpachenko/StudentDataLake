@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Student } from 'src/app/models/student';
+import { StudentModel } from '../models/student-model';
 
 @Component({
   selector: 'app-student-dialog',
@@ -11,7 +12,7 @@ export class StudentDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<StudentDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Student) {}
+    @Inject(MAT_DIALOG_DATA) public data: StudentModel) {}
 
   onNoClick(): void {
     this.dialogRef.close();

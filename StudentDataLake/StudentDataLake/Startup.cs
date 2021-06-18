@@ -69,6 +69,7 @@ namespace StudentDataLake
             {
                 options.AllowAnyOrigin();
                 options.AllowAnyHeader();
+                options.AllowAnyMethod();
             });
 
             app.UseDefaultFiles();

@@ -2,7 +2,6 @@
 using StudentDataLake.Common.Entity;
 using StudentDataLake.Common.Entity.Assessments;
 using StudentDataLake.Common.Entity.Students;
-using System.Collections.Generic;
 
 namespace StudentDataLake.Infrastructure.Databases
 {
@@ -16,21 +15,6 @@ namespace StudentDataLake.Infrastructure.Databases
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var students = new List<Student>
-            {
-                new Student
-                {
-                    Id = 1,
-                    Email = "TestEmail@test",
-                    FirstName = "FirstNameTest",
-                    FirstNativeName = "FirstNativeNameTest",
-                    LastName = "LastNameTest",
-                    LastNativeName = "LastNativeNameTest"
-                }
-            };
-
-            modelBuilder.Entity<Student>().HasData(students);
-
             base.OnModelCreating(modelBuilder);
         }
 

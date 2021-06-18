@@ -82,7 +82,9 @@ namespace StudentDataLake.Controllers
 
         [HttpPut("{id}")]
         //Edit student
-        public async Task UpdateAsync(int id, [FromBody] Student data)
+        public async Task UpdateAsync(
+            int id,
+            [FromBody] Student data)
         {
             try
             {

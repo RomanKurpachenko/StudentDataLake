@@ -8,6 +8,12 @@ let StudentService = class StudentService {
     getStudents() {
         return this.http.get(this.url);
     }
+    create(data) {
+        return this.http.post(this.url, data);
+    }
+    update(data) {
+        return this.http.put(`${this.url}/${data.id}`, data);
+    }
 };
 StudentService = __decorate([
     Injectable({

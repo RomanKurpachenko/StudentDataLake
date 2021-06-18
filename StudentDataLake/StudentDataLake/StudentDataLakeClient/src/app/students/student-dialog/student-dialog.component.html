@@ -1,7 +1,7 @@
 <p>
     <mat-form-field appearance="outline">
         <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.email'>
+        <input matInput placeholder="Placeholder" [(ngModel)]='data.student.email'>
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>Hint</mat-hint>
     </mat-form-field>
@@ -9,7 +9,7 @@
 <p>
     <mat-form-field appearance="outline">
         <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.firstName'>
+        <input matInput placeholder="Placeholder" [(ngModel)]='data.student.firstName'>
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>Hint</mat-hint>
     </mat-form-field>
@@ -17,7 +17,7 @@
 <p>
     <mat-form-field appearance="outline">
         <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.firstNativeName'>
+        <input matInput placeholder="Placeholder" [(ngModel)]='data.student.firstNativeName'>
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>Hint</mat-hint>
     </mat-form-field>
@@ -25,7 +25,7 @@
 <p>
     <mat-form-field appearance="outline">
         <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.lastName'>
+        <input matInput placeholder="Placeholder" [(ngModel)]='data.student.lastName'>
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>Hint</mat-hint>
     </mat-form-field>
@@ -33,7 +33,7 @@
 <p>
     <mat-form-field appearance="outline">
         <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.lastNativeName'>
+        <input matInput placeholder="Placeholder" [(ngModel)]='data.student.lastNativeName'>
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>Hint</mat-hint>
     </mat-form-field>
@@ -45,6 +45,11 @@
 </p>
 <p>
     <button mat-button [mat-dialog-close]="data">
-        Save
+        <span *ngIf='data.isNewStudent'>
+            Add new student
+        </span>
+        <span *ngIf='!data.isNewStudent'>
+            Update student
+        </span>
     </button>
 </p>

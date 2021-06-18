@@ -1,8 +1,14 @@
-<button mat-button (click)='openDialog()'>
+<button mat-button (click)='openDialog(true)'>
     Add student
 </button>
 <mat-list>
     <mat-list-item *ngFor='let student of students'>
-       Id == {{student.id}}. {{student.firstName}} {{student.lastName}}
+        Id == {{student.id}}. {{student.firstName}} {{student.lastName}} 
+        <button mat-icon-button color="primary" (click)='openDialog(false, student)'>
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)='deleteStudent(student.id)'>
+            <mat-icon>delete</mat-icon>
+        </button>
     </mat-list-item>
 </mat-list>
