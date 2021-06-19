@@ -1,6 +1,7 @@
 import { __decorate } from "tslib";
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CheckListComponent } from './check-list/check-list.component';
 import { HomeComponent } from './home/home.component';
 import { StudentsComponent } from './students/students.component';
 const routes = [
@@ -11,6 +12,10 @@ const routes = [
     {
         path: 'students',
         component: StudentsComponent,
+    },
+    {
+        path: 'check-lists',
+        component: CheckListComponent,
     }
 ];
 let AppRoutingModule = class AppRoutingModule {

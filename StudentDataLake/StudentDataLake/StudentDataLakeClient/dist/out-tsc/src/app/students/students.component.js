@@ -73,6 +73,12 @@ let StudentsComponent = class StudentsComponent {
             lastNativeName: ""
         };
     }
+    deleteStudent(id) {
+        this.studentService.delete(id).subscribe(result => {
+            this.openSnackBar("Данные были успешно удалены", "Хорошо");
+            this.students = this.students.filter(student => student.id != id);
+        });
+    }
 };
 StudentsComponent = __decorate([
     Component({
