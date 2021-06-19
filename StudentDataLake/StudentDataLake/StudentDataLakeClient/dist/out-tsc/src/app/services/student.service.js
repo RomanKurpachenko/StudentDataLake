@@ -14,9 +14,6 @@ let StudentService = class StudentService {
     update(data) {
         return this.http.put(`${this.url}/${data.id}`, data);
     }
-    delete(id) {
-        return this.http.delete(`${this.url}/${id}`);
-    }
 };
 StudentService = __decorate([
     Injectable({
