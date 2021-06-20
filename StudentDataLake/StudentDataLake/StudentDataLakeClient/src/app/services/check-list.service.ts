@@ -13,11 +13,19 @@ export class CheckListService {
     constructor(private http: HttpClient) {  
     }
 
-    getCheckList(): Observable<CheckList[]>{
+    getCheckLists(): Observable<CheckList[]>{
         return this.http.get<CheckList[]>(this.url);
     }
 
-    createCheckList(data: CheckList): Observable<void> {
+    create(data: CheckList): Observable<void> {
         return this.http.post<void>(this.url, data);
+    }
+
+    update(data: CheckList): Observable<void> {
+        return this.http.put<void>(`${this.url}/${data.id}`, data);
+    }
+
+    delete(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.url}/${id}`);
     }
 }

@@ -5,11 +5,17 @@ let CheckListService = class CheckListService {
         this.http = http;
         this.url = `http://localhost:5001/api/checkList`;
     }
-    getCheckList() {
+    getCheckLists() {
         return this.http.get(this.url);
     }
-    createCheckList(data) {
+    create(data) {
         return this.http.post(this.url, data);
+    }
+    update(data) {
+        return this.http.put(`${this.url}/${data.id}`, data);
+    }
+    delete(id) {
+        return this.http.delete(`${this.url}/${id}`);
     }
 };
 CheckListService = __decorate([
