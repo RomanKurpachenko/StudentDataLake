@@ -4,15 +4,6 @@ using System.Text.Json.Serialization;
 
 namespace StudentDataLake.Common.Entity.Students
 {
-    public enum Mark
-    {
-        Bad = 0,
-        NotGood = 1,
-        Fine = 2,
-        Good = 3,
-        Excellent = 4
-    }
-
     public class Student
     {
         [Key]
@@ -38,5 +29,7 @@ namespace StudentDataLake.Common.Entity.Students
 
         [JsonIgnore]
         public List<StudentCheckPoint> CheckPoints { get; set; }
+
+        public virtual List<StudentGroup> Groups { get; set; }
     }
 }
