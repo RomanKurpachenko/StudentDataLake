@@ -1,0 +1,39 @@
+<p>
+    <mat-form-field appearance="outline">
+        <mat-label>id контрольного списка</mat-label>
+        <input matInput placeholder="id контрольного списка" [(ngModel)]='data.checkList.id'>
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+</p>
+<p>
+    <mat-form-field appearance="outline">
+        <mat-label>Название списка</mat-label>
+        <input matInput placeholder="Название списка" [(ngModel)]='data.checkList.name'>
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+</p>
+<p>
+    <mat-form-field appearance="outline">
+        <mat-label>Уровень студента</mat-label>
+        <input matInput placeholder="Уровень студента" [(ngModel)]='data.checkList.level'>
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+</p>
+<p>
+    <button mat-button (click)='onNoClick()'>
+        Cancel
+    </button>
+</p>
+<p>
+    <button mat-button [mat-dialog-close]="data">
+        <span *ngIf='data.isNewCheckList'>
+            Add new checkList
+        </span>
+        <span *ngIf='!data.isNewCheckList'>
+            Update checkList
+        </span>
+    </button>
+</p>

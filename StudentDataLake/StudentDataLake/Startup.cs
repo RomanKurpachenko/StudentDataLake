@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using StudentDataLake.Infrastructure.Databases;
+using StudentDataLake.Infrastructure.Services.CheckLists;
 using StudentDataLake.Infrastructure.Services.Students;
 
 namespace StudentDataLake
@@ -33,6 +34,8 @@ namespace StudentDataLake
                 options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
 
             services.AddTransient<IStudentService, StudentService>();
+
+            services.AddTransient<ICheckListService, CheckListService>();
 
             services
                 .AddControllers()
