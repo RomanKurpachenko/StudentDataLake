@@ -32,8 +32,22 @@ export class StudentDialogComponent {
     })
   }
 
-  openSnackBar(message: string, action: string = null) {
-    this.snackBar.open(message, action);
+  save() {
+    this.spinner.show();
+    if (this.data.isNewStudent) {
+      this.studentService.create(this.data.student).subscribe(result => {
+        this.afterOkResponse("Новый студент был добавлен", "Отлично")
+      }, error => {
+        this.afterBadResponse("Что-то пошло не так", "Понятно");
+      });
+    }
+    else {
+      this.studentService.update(this.data.student).subscribe(result => {
+        this.afterOkResponse("Cтудент был обновлен", "Отлично");
+      }, error => {
+        this.afterBadResponse("Что-то пошло не так", "Понятно");
+      });
+    }
   }
 
   afterOkResponse(
@@ -54,22 +68,8 @@ export class StudentDialogComponent {
     this.openSnackBar(message, action)
   }
 
-  save() {
-    this.spinner.show();
-    if (this.data.isNewStudent) {
-      this.studentService.create(this.data.student).subscribe(result => {
-        this.afterOkResponse("Новый студент был добавлен", "Отлично")
-      }, error => {
-        this.afterBadResponse("Что-то пошло не так", "Понятно");
-      });
-    }
-    else {
-      this.studentService.update(this.data.student).subscribe(result => {
-        this.afterOkResponse("Cтудент был обновлен", "Отлично");
-      }, error => {
-        this.afterBadResponse("Что-то пошло не так", "Понятно");
-      });
-    }
+  openSnackBar(message: string, action: string = null) {
+    this.snackBar.open(message, action);
   }
 
   onNoClick(): void {
