@@ -9,7 +9,7 @@ import * as signalR from "@microsoft/signalr";
 })
 export class StudentService {
 
-  private url = `${window.location.href}api/student`;
+  private url = `${window.location.href}api/students`;
 
   private signalrUrl = `${window.location.href}hub/students`;
 

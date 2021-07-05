@@ -12,16 +12,16 @@ namespace StudentDataLake.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class StudentsController : ControllerBase
     {
-        private readonly ILogger<StudentController> _logger;
+        private readonly ILogger<StudentsController> _logger;
 
         private readonly IHubContext<StudentSyncHub> _hubContext;
 
         private readonly IStudentService _studentService;
 
-        public StudentController(
-            ILogger<StudentController> logger,
+        public StudentsController(
+            ILogger<StudentsController> logger,
             IHubContext<StudentSyncHub> hubContext,
             IStudentService studentService)
         {
@@ -71,18 +71,21 @@ namespace StudentDataLake.Controllers
                     {
                         var newStudent = await _studentService.CreateAsync(data);
 
-                        await StudentSyncHub.SendNewStudentMessageAsync(
-                            _hubContext,
-                            newStudent);
+                        if(newStudent != null)
+                        {
+                            await StudentSyncHub.SendNewStudentMessageAsync(
+                                _hubContext,
+                                newStudent);
 
-                        _logger.LogInformation("Student was added");
+                            _logger.LogInformation("Student was added");
+                        }
                     }
                 }
             }
             catch(Exception ex)
             {
                 _logger.LogError(
-                    $"[{nameof(StudentController)}][{nameof(CreateAsync)}]",
+                    $"[{nameof(StudentsController)}][{nameof(CreateAsync)}]",
                     ex);
             }
         }
@@ -110,7 +113,7 @@ namespace StudentDataLake.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(
-                    $"[{nameof(StudentController)}][{nameof(UpdateAsync)}]",
+                    $"[{nameof(StudentsController)}][{nameof(UpdateAsync)}]",
                     ex);
             }
         }
@@ -125,7 +128,7 @@ namespace StudentDataLake.Controllers
             catch(Exception ex)
             {
                 _logger.LogError(
-                    $"[{nameof(StudentController)}][{nameof(DeleteAsync)}]",
+                    $"[{nameof(StudentsController)}][{nameof(DeleteAsync)}]",
                     ex);
             }
         }
