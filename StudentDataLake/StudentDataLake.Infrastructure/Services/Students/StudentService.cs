@@ -15,7 +15,7 @@ namespace StudentDataLake.Infrastructure.Services.Students
             _db = studentDataLakeContext;
         }
 
-        public async Task CreateAsync(Student data)
+        public async Task<Student> CreateAsync(Student data)
         {
             if(data.Id <= 0)
             {
@@ -24,8 +24,12 @@ namespace StudentDataLake.Infrastructure.Services.Students
                     _db.Students.Add(data);
 
                     await _db.SaveChangesAsync();
+
+                    return data;
                 }
             }
+
+            return null;
         }
 
         public async Task DeleteAsync(int id)
@@ -54,7 +58,7 @@ namespace StudentDataLake.Infrastructure.Services.Students
             return student;
         }
 
-        public async Task UpdateAsync(
+        public async Task<Student> UpdateAsync(
             int id, 
             Student data)
         {
@@ -77,8 +81,12 @@ namespace StudentDataLake.Infrastructure.Services.Students
                     _db.Update(student);
 
                     await _db.SaveChangesAsync();
+
+                    return student;
                 }
             }
+
+            return null;
         }
     }
 }

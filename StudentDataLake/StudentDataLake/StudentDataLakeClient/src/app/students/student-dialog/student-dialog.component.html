@@ -1,55 +1,62 @@
-<p>
-    <mat-form-field appearance="outline">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.student.email'>
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field appearance="outline">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.student.firstName'>
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field appearance="outline">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.student.firstNativeName'>
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field appearance="outline">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.student.lastName'>
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-</p>
-<p>
-    <mat-form-field appearance="outline">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.student.lastNativeName'>
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint>
-    </mat-form-field>
-</p>
-<p>
-    <button mat-button (click)='onNoClick()'>
-        Cancel
-    </button>
-</p>
-<p>
-    <button mat-button [mat-dialog-close]="data">
-        <span *ngIf='data.isNewStudent'>
-            Add new student
-        </span>
-        <span *ngIf='!data.isNewStudent'>
-            Update student
-        </span>
-    </button>
-</p>
+<h2 mat-dialog-title>
+    <span *ngIf='data.isNewStudent'>
+        Add new student
+    </span>
+    <span *ngIf='!data.isNewStudent'>
+        Update student
+    </span>
+</h2>
+
+<mat-dialog-content class="mat-typography">
+
+    <form [formGroup]='surveyForm'>
+
+        <mat-form-field class="inputpicker" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input formControlName='email' matInput [(ngModel)]='data.student.email'>
+        </mat-form-field>
+
+        <mat-form-field class="inputpicker" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input formControlName='firstName' matInput [(ngModel)]='data.student.firstName'>
+        </mat-form-field>
+
+        <mat-form-field class="inputpicker" appearance="outline">
+            <mat-label>First Native Name</mat-label>
+            <input formControlName='firstNativeName' matInput [(ngModel)]='data.student.firstNativeName'>
+        </mat-form-field>
+
+        <mat-form-field class="inputpicker" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input formControlName='lastName' matInput [(ngModel)]='data.student.lastName'>
+        </mat-form-field>
+
+        <mat-form-field class="inputpicker" appearance="outline">
+            <mat-label>Last Native Name</mat-label>
+            <input formControlName='lastNativeName' matInput [(ngModel)]='data.student.lastNativeName'>
+        </mat-form-field>
+
+        <p>
+            <mat-drawer></mat-drawer>
+        </p>
+
+        <p>
+            <button mat-flat-button color="primary" [disabled]='!surveyForm.valid' (click)='save()'>
+                <span *ngIf='data.isNewStudent'>
+                    Add new student
+                </span>
+                <span *ngIf='!data.isNewStudent'>
+                    Update student
+                </span>
+            </button>
+        </p>
+
+        <p>
+            <button mat-flat-button color="warn" (click)='onNoClick()'>
+                Cancel
+            </button>
+        </p>
+
+    </form>
+
+</mat-dialog-content>

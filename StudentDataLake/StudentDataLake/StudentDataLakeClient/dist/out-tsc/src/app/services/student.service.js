@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 let StudentService = class StudentService {
     constructor(http) {
         this.http = http;
-        this.url = `http://localhost:5001/api/student`;
+        this.url = `${window.location.href}api/student`;
     }
     getStudents() {
         return this.http.get(this.url);

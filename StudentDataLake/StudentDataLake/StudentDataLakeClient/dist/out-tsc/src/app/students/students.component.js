@@ -1,5 +1,7 @@
 import { __decorate } from "tslib";
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { StudentDialogComponent } from './student-dialog/student-dialog.component';
 let StudentsComponent = class StudentsComponent {
     constructor(spinner, studentService, dialog, _snackBar) {
@@ -7,9 +9,38 @@ let StudentsComponent = class StudentsComponent {
         this.studentService = studentService;
         this.dialog = dialog;
         this._snackBar = _snackBar;
+        this.students = null;
+        this.dataDialogModel = this.getNewDataDialogModel();
+        this.displayedColumns = [
+            'id',
+            'email',
+            'firstName',
+            'firstNativeName',
+            'lastName',
+            'lastNativeName'
+        ];
+        this.dataSource = new MatTableDataSource(this.students);
     }
     ngOnInit() {
         this.getStudents();
+    }
+    ngAfterViewInit() {
+        this.dataSource.sort = this.sort;
+    }
+    getNewDataDialogModel() {
+        let dataModel = {
+            isNewStudent: true,
+            student: {
+                id: 0,
+                email: "",
+                firstName: "",
+                firstNativeName: "",
+                lastName: "",
+                lastNativeName: ""
+            },
+            isDataAddedOrUpdated: false
+        };
+        return dataModel;
     }
     getStudents() {
         this.spinner.show();
@@ -24,23 +55,32 @@ let StudentsComponent = class StudentsComponent {
             this.spinner.hide();
         });
     }
-    openDialog(isNewStudent, student = null) {
+    openStudentDialog(isNewStudent, student = null) {
+        if (!isNewStudent) {
+            this.dataDialogModel.isNewStudent = false;
+            this.dataDialogModel.student = student;
+            this.dataDialogModel.isDataAddedOrUpdated = false;
+        }
+        else {
+            if (this.dataDialogModel.isDataAddedOrUpdated) {
+                this.dataDialogModel = this.getNewDataDialogModel();
+            }
+        }
         const dialogRef = this.dialog.open(StudentDialogComponent, {
             width: '300px',
-            data: this.getDataForDialog(isNewStudent, student)
+            data: this.dataDialogModel
         });
-        dialogRef.afterClosed().subscribe(data => {
-            if (data.isNewStudent) {
-                this.studentService.create(data.student).subscribe(result => {
-                    this.openSnackBar("Новый студент был добавлен", "Отлично");
-                    this.getStudents();
-                });
-            }
-            else {
-                this.studentService.update(data.student).subscribe(result => {
-                    this.openSnackBar("Данные были успешно обновлены", "Круть");
-                });
-            }
+    }
+    openCreatingDialog() {
+        this.openStudentDialog(true);
+    }
+    openUpdatingDialog(student) {
+        this.openStudentDialog(false, student);
+    }
+    deleteStudent(id) {
+        this.studentService.delete(id).subscribe(result => {
+            this.openSnackBar("Данные были успешно удалены", "Хорошо");
+            this.students = this.students.filter(student => student.id != id);
         });
     }
     openSnackBar(message, action) {
@@ -49,37 +89,10 @@ let StudentsComponent = class StudentsComponent {
             panelClass: "snack-height"
         });
     }
-    getDataForDialog(isNewStudent, student = null) {
-        if (isNewStudent) {
-            return {
-                student: this.getNewStudent(),
-                isNewStudent: isNewStudent
-            };
-        }
-        else {
-            return {
-                student: student,
-                isNewStudent: isNewStudent
-            };
-        }
-    }
-    getNewStudent() {
-        return {
-            id: 0,
-            email: "",
-            firstName: "",
-            firstNativeName: "",
-            lastName: "",
-            lastNativeName: ""
-        };
-    }
-    deleteStudent(id) {
-        this.studentService.delete(id).subscribe(result => {
-            this.openSnackBar("Данные были успешно удалены", "Хорошо");
-            this.students = this.students.filter(student => student.id != id);
-        });
-    }
 };
+__decorate([
+    ViewChild(MatSort)
+], StudentsComponent.prototype, "sort", void 0);
 StudentsComponent = __decorate([
     Component({
         selector: 'app-students',

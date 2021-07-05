@@ -1,4 +1,4 @@
-export interface Student{
+export interface Student {
 
     id: number;
 
@@ -11,4 +11,10 @@ export interface Student{
     lastName: string;
 
     lastNativeName: string;
+
+    checkPoints?: [];
+
+    groups?: [];
+
+    stages?: [];
 }

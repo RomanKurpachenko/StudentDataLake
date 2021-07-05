@@ -10,9 +10,9 @@ namespace StudentDataLake.Infrastructure.Services.Students
 
         Task<Student> GetAsync(int id);
 
-        Task CreateAsync(Student data);
+        Task<Student> CreateAsync(Student data);
 
-        Task UpdateAsync(
+        Task<Student> UpdateAsync(
             int id, 
             Student data);
 

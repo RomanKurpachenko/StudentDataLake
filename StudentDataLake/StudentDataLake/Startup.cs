@@ -1,13 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
-using StudentDataLake.Infrastructure.Databases;
-using StudentDataLake.Infrastructure.Services.Students;
+using StudentDataLake.SignalR.Students;
 
 namespace StudentDataLake
 {
@@ -24,15 +22,15 @@ namespace StudentDataLake
             IConfiguration configuration)
         {
             Environment = environment;
+
             Configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<StudentDataLakeContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DbConnection")));
+            services.RegistrationOfDependency(Configuration);
 
-            services.AddTransient<IStudentService, StudentService>();
+            services.AddAutoMapper(typeof(AutoMapperProfile));
 
             services
                 .AddControllers()
@@ -42,13 +40,15 @@ namespace StudentDataLake
                     options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                 });
 
+            services.AddSignalR();
+
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = $"{JSClientName}/dist";
             });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             if (Environment.IsDevelopment())
             {
@@ -60,10 +60,6 @@ namespace StudentDataLake
 
                 app.UseSpaStaticFiles();
             }
-
-            app.UseHttpsRedirection();
-
-            //app.UseCors("CorsPolicy");
 
             app.UseCors(options =>
             {
@@ -81,19 +77,19 @@ namespace StudentDataLake
             app
                 .UseEndpoints(endpoints =>
                 {
-                    endpoints
-                    .MapDefaultControllerRoute()
-                    .RequireAuthorization();
-                });
-                //.UseSpa(spa =>
-                //{
-                //    spa.Options.SourcePath = $"{JSClientName}";
+                    endpoints.MapHub<StudentSyncHub>("/hub/students");
 
-                //    if (Environment.IsDevelopment())
-                //    {
-                //        spa.UseAngularCliServer(npmScript: "start");
-                //    }
-                //});
+                    endpoints.MapDefaultControllerRoute();
+                })
+                .UseSpa(spa =>
+                {
+                    spa.Options.SourcePath = $"{JSClientName}";
+
+                    if (Environment.IsDevelopment())
+                    {
+                        spa.UseAngularCliServer(npmScript: "start");
+                    }
+                });
         }
     }
 }

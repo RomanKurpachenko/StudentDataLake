@@ -25,10 +25,10 @@ namespace StudentDataLake.Common.Entity.Students
         public string LastNativeName { get; set; }
 
         [JsonIgnore]
-        public List<StudentStageInfo> Stages { get; set; }
+        public virtual List<StudentStageInfo> Stages { get; set; }
 
         [JsonIgnore]
-        public List<StudentCheckPoint> CheckPoints { get; set; }
+        public virtual List<StudentCheckPoint> CheckPoints { get; set; }
 
         public virtual List<StudentGroup> Groups { get; set; }
     }

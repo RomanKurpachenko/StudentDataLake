@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using StudentDataLake.Common.Entity.Students;
 using StudentDataLake.Infrastructure.Services.Students;
+using StudentDataLake.SignalR.Students;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,20 +14,23 @@ namespace StudentDataLake.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
-        private readonly IStudentService _studentService;
-
         private readonly ILogger<StudentController> _logger;
 
+        private readonly IHubContext<StudentSyncHub> _hubContext;
+
+        private readonly IStudentService _studentService;
+
         public StudentController(
-            IStudentService studentService,
-            ILogger<StudentController> logger)
+            ILogger<StudentController> logger,
+            IHubContext<StudentSyncHub> hubContext,
+            IStudentService studentService)
         {
-            _studentService = studentService;
             _logger = logger;
+            _hubContext = hubContext;
+            _studentService = studentService;
         }
 
         [HttpGet]
-        //Get all
         public async Task<ActionResult<List<Student>>> GetAsync()
         {
             try
@@ -41,7 +46,6 @@ namespace StudentDataLake.Controllers
         }
 
         [HttpGet("{id}")]
-        //Get student by id
         public async Task<ActionResult<Student>> GetAsync(int id)
         {
             try
@@ -57,7 +61,6 @@ namespace StudentDataLake.Controllers
         }
 
         [HttpPost]
-        //Create student
         public async Task CreateAsync([FromBody] Student data)
         {
             try
@@ -66,7 +69,11 @@ namespace StudentDataLake.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        await _studentService.CreateAsync(data);
+                        var newStudent = await _studentService.CreateAsync(data);
+
+                        await StudentSyncHub.SendNewStudentMessageAsync(
+                            _hubContext,
+                            newStudent);
 
                         _logger.LogInformation("Student was added");
                     }
@@ -81,7 +88,6 @@ namespace StudentDataLake.Controllers
         }
 
         [HttpPut("{id}")]
-        //Edit student
         public async Task UpdateAsync(
             int id,
             [FromBody] Student data)
@@ -110,7 +116,6 @@ namespace StudentDataLake.Controllers
         }
 
         [HttpDelete("{id}")]
-        //Delete student
         public async Task DeleteAsync(int id)
         {
             try
