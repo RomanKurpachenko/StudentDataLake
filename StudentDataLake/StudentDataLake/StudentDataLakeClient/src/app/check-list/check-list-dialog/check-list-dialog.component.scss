@@ -1,0 +1,9 @@
+.mat-form-field {
+    width: 100% !important;
+    margin-top: 15px;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+    margin: 0 !important;
+    padding: 0;
+}

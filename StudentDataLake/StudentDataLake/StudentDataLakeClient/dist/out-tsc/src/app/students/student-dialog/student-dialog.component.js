@@ -17,19 +17,6 @@ let StudentDialogComponent = class StudentDialogComponent {
             lastNativeName: new FormControl(data.student.lastNativeName, Validators.required),
         });
     }
-    openSnackBar(message, action = null) {
-        this.snackBar.open(message, action);
-    }
-    afterOkResponse(message, action) {
-        this.spinner.hide();
-        this.data.isDataAddedOrUpdated = true;
-        this.openSnackBar(message, action);
-        this.dialogRef.close();
-    }
-    afterBadResponse(message, action) {
-        this.spinner.hide();
-        this.openSnackBar(message, action);
-    }
     save() {
         this.spinner.show();
         if (this.data.isNewStudent) {
@@ -46,6 +33,19 @@ let StudentDialogComponent = class StudentDialogComponent {
                 this.afterBadResponse("Что-то пошло не так", "Понятно");
             });
         }
+    }
+    afterOkResponse(message, action) {
+        this.spinner.hide();
+        this.data.isDataAddedOrUpdated = true;
+        this.openSnackBar(message, action);
+        this.dialogRef.close();
+    }
+    afterBadResponse(message, action) {
+        this.spinner.hide();
+        this.openSnackBar(message, action);
+    }
+    openSnackBar(message, action = null) {
+        this.snackBar.open(message, action);
     }
     onNoClick() {
         this.dialogRef.close();

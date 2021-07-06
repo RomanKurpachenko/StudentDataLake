@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using StudentDataLake.SignalR.Checklist;
+using StudentDataLake.SignalR.CheckPoints;
 using StudentDataLake.SignalR.Students;
 
 namespace StudentDataLake
@@ -78,6 +80,10 @@ namespace StudentDataLake
                 .UseEndpoints(endpoints =>
                 {
                     endpoints.MapHub<StudentSyncHub>("/hub/students");
+
+                    endpoints.MapHub<CheckListSyncHub>("/hub/checkList");
+
+                    endpoints.MapHub<CheckPointSyncHub>("/hub/checkPoint");
 
                     endpoints.MapDefaultControllerRoute();
                 })

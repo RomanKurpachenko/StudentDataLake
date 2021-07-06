@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>
+    <span *ngIf='data.isNewCheckList'>
+        Add new isNewCheckList
+    </span>
+    <span *ngIf='!data.isNewCheckList'>
+        Update CheckList
+    </span>
+</h2>
+
+<mat-dialog-content class="mat-typography">
+
+    <form [formGroup]='surveyForm'>
+
+        <mat-form-field class="inputpicker" appearance="outline">
+            <mat-label>checkList name</mat-label>
+            <input formControlName='name' matInput [(ngModel)]='data.checkList.name'>
+        </mat-form-field>
+
+        <p>
+            <mat-drawer></mat-drawer>
+        </p>
+
+        <p>
+            <button mat-flat-button color="primary" [disabled]='!surveyForm.valid' (click)='save()'>
+                <span *ngIf='data.isNewCheckList'>
+                    Add new checkList
+                </span>
+                <span *ngIf='!data.isNewCheckList'>
+                    Update checkList
+                </span>
+            </button>
+        </p>
+
+        <p>
+            <button mat-flat-button color="warn" (click)='onNoClick()'>
+                Cancel
+            </button>
+        </p>
+
+    </form>
+    
+</mat-dialog-content>

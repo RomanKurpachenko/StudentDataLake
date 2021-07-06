@@ -1,6 +1,5 @@
 import { __decorate } from "tslib";
-import { Component, ViewChild } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { StudentDialogComponent } from './student-dialog/student-dialog.component';
 let StudentsComponent = class StudentsComponent {
@@ -23,9 +22,7 @@ let StudentsComponent = class StudentsComponent {
     }
     ngOnInit() {
         this.getStudents();
-    }
-    ngAfterViewInit() {
-        this.dataSource.sort = this.sort;
+        this.startConnections();
     }
     getNewDataDialogModel() {
         let dataModel = {
@@ -47,6 +44,7 @@ let StudentsComponent = class StudentsComponent {
         this.studentService.getStudents().subscribe(result => {
             if (result) {
                 this.students = result;
+                this.dataSource = new MatTableDataSource(this.students);
                 this.spinner.hide();
             }
         }, error => {
@@ -54,6 +52,19 @@ let StudentsComponent = class StudentsComponent {
             this.students = [];
             this.spinner.hide();
         });
+    }
+    startConnections() {
+        this.studentService.startConnection();
+        this.studentService.hubConnection.on('NewStudentMessage', (result) => {
+            if (result) {
+                this.students.push(result);
+                this.dataSource = new MatTableDataSource(this.students);
+            }
+        });
+    }
+    applyFilter(event) {
+        const filterValue = event.target.value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
     }
     openStudentDialog(isNewStudent, student = null) {
         if (!isNewStudent) {
@@ -90,9 +101,6 @@ let StudentsComponent = class StudentsComponent {
         });
     }
 };
-__decorate([
-    ViewChild(MatSort)
-], StudentsComponent.prototype, "sort", void 0);
 StudentsComponent = __decorate([
     Component({
         selector: 'app-students',
