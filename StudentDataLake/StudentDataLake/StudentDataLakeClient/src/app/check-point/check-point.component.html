@@ -1,0 +1,6 @@
+<button mat-button (click)='openDialog(true)'>
+    Add checkPoint
+</button>
+    <mat-list-item *ngFor='let checkPoint of checkPoints'>
+        Id == {{checkPoint.id}}. {{checkPoint.checkListId}} {{checkPoint.name}}
+    </mat-list-item>

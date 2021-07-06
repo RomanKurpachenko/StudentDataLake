@@ -1,7 +1,7 @@
 <p>
     <mat-form-field appearance="outline">
         <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.checkList.id'>
+        <input matInput placeholder="Placeholder" [(ngModel)]='data.checkPoint.id'>
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>Hint</mat-hint>
     </mat-form-field>
@@ -9,7 +9,7 @@
 <p>
     <mat-form-field appearance="outline">
         <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.checkList.name'>
+        <input matInput placeholder="Placeholder" [(ngModel)]='data.checkPoint.checkListId'>
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>Hint</mat-hint>
     </mat-form-field>
@@ -17,7 +17,7 @@
 <p>
     <mat-form-field appearance="outline">
         <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" [(ngModel)]='data.checkList.level'>
+        <input matInput placeholder="Placeholder" [(ngModel)]='data.checkPoint.name'>
         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
         <mat-hint>Hint</mat-hint>
     </mat-form-field>
@@ -29,11 +29,11 @@
 </p>
 <p>
     <button mat-button [mat-dialog-close]="data">
-        <span *ngIf='data.isNewCheckList'>
-            Add new checkList
+        <span *ngIf='data.isNewCheckPoint'>
+            Add new checkPoint
         </span>
-        <span *ngIf='!data.isNewCheckList'>
-            Update checkList
+        <span *ngIf='!data.isNewCheckPoint'>
+            Update checkPoint
         </span>
     </button>
 </p>

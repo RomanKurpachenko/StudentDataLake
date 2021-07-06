@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using StudentDataLake.Infrastructure.Databases;
 using StudentDataLake.Infrastructure.Services.CheckLists;
+using StudentDataLake.Infrastructure.Services.CheckPoints;
 using StudentDataLake.Infrastructure.Services.Students;
 
 namespace StudentDataLake
@@ -36,6 +37,8 @@ namespace StudentDataLake
             services.AddTransient<IStudentService, StudentService>();
 
             services.AddTransient<ICheckListService, CheckListService>();
+
+            services.AddTransient<ICheckPointService, CheckPointService>();
 
             services
                 .AddControllers()
