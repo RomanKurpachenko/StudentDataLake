@@ -4,7 +4,7 @@ import * as signalR from '@microsoft/signalr';
 let CheckPointService = class CheckPointService {
     constructor(http) {
         this.http = http;
-        this.url = `${window.location.href}api/checkPoint`;
+        this.url = `${window.location.href}api/checkpoint`;
         this.signalUrl = `${window.location.href}hub/checkList`;
         this.startConnection = () => {
             this.hubConnection = new signalR.HubConnectionBuilder()

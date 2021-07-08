@@ -9,9 +9,9 @@ import * as signalR from "@microsoft/signalr"
 })
 export class CheckListService {
 
-    private url = `${window.location.href}api/checkList`;
+    private url = `http://localhost:5000/api/checklists`;
     
-    private signalUrl = `${window.location.href}hub/checkList`;
+    private signalUrl = `http://localhost:5000/hub/checkList`;
 
     public hubConnection: signalR.HubConnection;
 
@@ -33,7 +33,7 @@ export class CheckListService {
     }
 
     getCheckList(id: number): Observable<CheckList>{
-        return this.http.get<CheckList>(`${this.url}`);
+        return this.http.get<CheckList>(`${this.url}/${{id}}`);
     }
 
     create(data: CheckList): Observable<void> {

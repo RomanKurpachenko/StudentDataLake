@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { Observable } from 'rxjs';
 
-import { CheckPoint } from '../models/check-point';
+import { Checkpoint } from '../models/check-point';
 
 @Injectable({
     providedIn: 'root'
 })
 export class CheckPointService{
-    private url = `${window.location.href}api/checkPoint`;
+    
+    private url = `${window.location.href}api/checkpoint`;
 
     private signalUrl = `${window.location.href}hub/checkList`;
 
@@ -28,15 +29,15 @@ export class CheckPointService{
             .catch(err => console.log('Error while starting connection: ' + err))
     }
 
-    getCheckPoints(): Observable<CheckPoint[]>{
-        return this.http.get<CheckPoint[]>(this.url);
+    getCheckPoints(): Observable<Checkpoint[]>{
+        return this.http.get<Checkpoint[]>(this.url);
     }
 
-    create(data: CheckPoint): Observable<void> {
+    create(data: Checkpoint): Observable<void> {
         return this.http.post<void>(this.url, data);
     }
 
-    update(data: CheckPoint): Observable<void> {
+    update(data: Checkpoint): Observable<void> {
         return this.http.put<void>(`${this.url}/${data.id}`, data);
     }
 

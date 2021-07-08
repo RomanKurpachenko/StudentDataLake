@@ -4,8 +4,8 @@ import { HomeComponent } from './home/home.component';
 
 import { StudentsComponent } from './students/students.component';
 
-import { CheckListComponent } from './check-list/check-list.component';
-import { CheckListDetailsComponent } from './check-list/check-list-details/check-list-details.component';
+import { ChecklistComponent } from './checklist/checklist.component';
+import { ChecklistDetailsComponent } from './checklist/checklist-details/checklist-details.component';
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'checkList/:id',
-    component: CheckListDetailsComponent,
+    component: ChecklistDetailsComponent,
   }
 ];
 

@@ -1,4 +1,4 @@
-export interface CheckPoint{
+export interface Checkpoint{
 
     id: number;
 

@@ -26,10 +26,12 @@ export class StudentService {
       .start()
       .then(() => console.log('Connection started'))
       .catch(err => console.log('Error while starting connection: ' + err))
+      
   }
 
   getStudents(): Observable<Student[]> {
     return this.http.get<Student[]>(this.url);
+    
   }
 
   create(data: Student): Observable<void> {

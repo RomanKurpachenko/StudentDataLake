@@ -4,8 +4,8 @@ import * as signalR from "@microsoft/signalr";
 let CheckListService = class CheckListService {
     constructor(http) {
         this.http = http;
-        this.url = `${window.location.href}api/checkList`;
-        this.signalUrl = `${window.location.href}hub/checkList`;
+        this.url = `http://localhost:5000/api/checklists`;
+        this.signalUrl = `http://localhost:5000/hub/checkList`;
         this.startConnection = () => {
             this.hubConnection = new signalR.HubConnectionBuilder()
                 .withUrl(this.signalUrl)
@@ -20,7 +20,7 @@ let CheckListService = class CheckListService {
         return this.http.get(this.url);
     }
     getCheckList(id) {
-        return this.http.get(`${this.url}/${id}`);
+        return this.http.get(`${this.url}/${{ id }}`);
     }
     create(data) {
         return this.http.post(this.url, data);

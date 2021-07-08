@@ -10,6 +10,7 @@ let CheckListDetailsComponent = class CheckListDetailsComponent {
     }
     ngOnInit() {
         this.id = this.activatedRoute.snapshot.params.id;
+        window.alert(this.id);
         this.checkListService.getCheckList(this.id).subscribe(result => {
             if (result) {
                 this.checkList = result;

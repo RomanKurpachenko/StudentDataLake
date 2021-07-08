@@ -11,13 +11,14 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { StudentService } from './services/student.service';
 import { StudentDialogComponent } from './students/student-dialog/student-dialog.component';
-import { CheckListComponent } from './check-list/check-list.component';
+import { CheckpointDialogComponent } from './checklist/checklist-details/checkpoints/checkpoint-dialog/checkpoint-dialog.component';
+import { CheckpointDetailsComponent } from './checklist/checklist-details/checkpoints/checkpoint-details/checkpoint-details.component';
+import { ChecklistComponent } from './checklist/checklist.component';
+import { ChecklistDetailsComponent } from './checklist/checklist-details/checklist-details.component';
+import { ChecklistDialogComponent } from './checklist/checklist-dialog/checklist-dialog.component';
+import { CheckpointsComponent } from './checklist/checklist-details/checkpoints/checkpoints.component';
 import { CheckListService } from './services/check-list.service';
-import { CheckListDialogComponent } from './check-list/check-list-dialog/check-list-dialog.component';
-import { CheckPointDialogComponent } from './check-point/check-point-dialog/check-point-dialog.component';
 import { CheckPointService } from './services/check-point.service';
-import { CheckPointComponent } from './check-point/check-point.component';
-import { CheckListDetailsComponent } from './check-list/check-list-details/check-list-details.component';
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -28,11 +29,12 @@ AppModule = __decorate([
             NavbarComponent,
             StudentsComponent,
             StudentDialogComponent,
-            CheckListComponent,
-            CheckListDialogComponent,
-            CheckPointComponent,
-            CheckPointDialogComponent,
-            CheckListDetailsComponent
+            ChecklistComponent,
+            CheckpointDialogComponent,
+            ChecklistDetailsComponent,
+            ChecklistDialogComponent,
+            CheckpointsComponent,
+            CheckpointDetailsComponent
         ],
         imports: [
             BrowserModule,

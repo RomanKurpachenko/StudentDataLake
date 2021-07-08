@@ -1,4 +1,4 @@
-import { CheckPoint } from "./check-point";
+import { Checkpoint } from "./check-point";
 
 export enum Level{
 
@@ -23,6 +23,8 @@ export interface CheckList{
 
     level: Level;
 
-    checkPoints: CheckPoint[];
+    checkpoints: Checkpoint[];
+
+    
 }
 
